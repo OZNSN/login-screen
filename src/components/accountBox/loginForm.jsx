@@ -17,10 +17,8 @@ export function LoginForm(props) {
     <BoxContainer>
       <FormContainer>
         <Input type="user_mail" placeholder="Email" />
-        <Marginer direction="vertical" margin={10} />
         <Input type="password" name="password" placeholder="Parola"></Input>
       </FormContainer>
-      <Marginer direction="vertical" margin={10} />
       <MutedLink href="#">Şifrenizi mi unuttunuz?</MutedLink>
       <Marginer direction="vertical" margin="1.6em" />
       <SubmitButton type="submit">Giriş yap</SubmitButton>

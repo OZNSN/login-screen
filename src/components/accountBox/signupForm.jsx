@@ -16,15 +16,9 @@ export function SignupForm(props) {
   return (
     <BoxContainer>
       <FormContainer>
-      <Marginer direction="vertical" margin={0} />
        <Input type="name" placeholder="Kullanıcı Adı" />
-       <Marginer direction="vertical" margin="0.5em" />
-       <Marginer direction="vertical" margin={5} />
        <Input type="company_name" placeholder="Şirket Adı" />
-       <Marginer direction="vertical" margin="0.5em" />
-       <Marginer direction="vertical" margin={5} />
        <Input type="user_mail" placeholder="Email" />
-       <Marginer direction="vertical" margin="0.5em" />
        <Input type="password" name="password" placeholder="Parola"></Input>
       </FormContainer>
       <Marginer direction="vertical" margin={10} />
