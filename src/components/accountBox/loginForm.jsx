@@ -2,7 +2,6 @@ import React, { useContext,useEffect,useRef,useState } from "react";
 import {
   BoldLink,
   BoxContainer,
-  FormContainer,
   Input,
   MutedLink,
   SubmitButton,
@@ -19,8 +18,8 @@ export function LoginForm(props) {
   const [isSubmit, setIsSubmit] = useState(false);
 
   const handleChange = (e) => {
-    const { email, value } = e.target;
-    setFormValues({ ...formValues, [email]: value });
+    const { name, value } = e.target;
+    setFormValues({ ...formValues, [name]: value });
   };
 
   const handleSubmit = (e) => {
@@ -38,7 +37,7 @@ export function LoginForm(props) {
     const errors = {};
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
     if (!values.email) {
-      errors.email = "Bu alan boş kalamaz";
+      errors.email = "Lütfen mail adresinizi giriniz";
     } else if (!regex.test(values.email)) {
       errors.email = "Lütfen geçerli bir mail giriniz";
     }
@@ -63,12 +62,11 @@ export function LoginForm(props) {
 
   return (
     <BoxContainer>
-      <FormContainer>
-        <Input ref={mailRef} type="text" placeholder="Email" value={ formValues.email} onChange= {handleChange} />
-        <p>{formErrors.email}</p>
+     
+     <Input ref={mailRef} type="text" name="email" placeholder="Email" value={ formValues.email} onChange= {handleChange} />        <p>{formErrors.email}</p>
         <Input ref={pwRef} type="password" name="password" placeholder="Parola" value={ formValues.password} onChange= {handleChange}></Input>
         <p>{formErrors.password}</p>
-      </FormContainer>
+      
       <MutedLink href="#">Şifrenizi mi unuttunuz?</MutedLink>
       <Marginer direction="vertical" margin="1.6em" />
       <SubmitButton type="submit" onClick={handleSubmit}>Giriş yap</SubmitButton>
