@@ -8,11 +8,12 @@ import {
 } from "./common";
 import { Marginer } from "../marginer";
 import { AccountContext } from "./accountContext";
+import axios from 'axios';
 
 export function SignupForm(props) {
   const { switchToSignin } = useContext(AccountContext);
 
-  const initialValues = { name: "",company_name: "", email: "", password: "" };
+  const initialValues = { user_mail: "", user_pass: "",identifier:"88888888", name: "",company_name: "",deviceModel:"web" };
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
@@ -20,12 +21,21 @@ export function SignupForm(props) {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
+
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setFormErrors(validate(formValues));
     setIsSubmit(true);
+    axios
+    .post('http://rotaportal-test.teknokurgu.com.tr/v1/api/signup', initialValues)
+    .then(response => {
+      console.log(response)
+    })
+    .catch(error => {
+      console.log(error)
+    })
   };
 
   useEffect(() => {
@@ -38,17 +48,17 @@ export function SignupForm(props) {
     const errors = {};
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
     if (!values.name) {
-      errors.name = "Bu alan boş kalamaz";
+      errors.name = "Lütfen bir kullanıcı adı girin";
     }
-    if (!values.email) {
-      errors.email = "Bu alan boş kalamaz";
-    } else if (!regex.test(values.email)) {
-      errors.email = "Lütfen geçerli bir mail giriniz";
+    if (!values.user_mail) {
+      errors.user_mail = "Lütfen mail adresinizi giriniz";
+    } else if (!regex.test(values.user_mail)) {
+      errors.user_mail = "Lütfen geçerli bir mail adresi giriniz";
     }
-    if (!values.password) {
-      errors.password = "Lütfen şifrenizi girin";
-    } else if (values.password.length < 8) {
-      errors.password = "Şifre 8 haneden küçük olamaz";
+    if (!values.user_pass) {
+      errors.user_pass = "Lütfen şifrenizi girin";
+    } else if (values.user_pass.length < 8) {
+      errors.user_pass = "Şifre 8 haneden küçük olamaz";
     } 
     return errors;
  };
@@ -58,26 +68,26 @@ export function SignupForm(props) {
   const pwRef = useRef(null)
   const mailRef = useRef(null)
 
-   /*isim ve email şifre zorunlulukları,obje oluşturup içine tanım,bu bilgilerin jsona aktarımı */
+   /*isim ve user_mail şifre zorunlulukları,obje oluşturup içine tanım,bu bilgilerin jsona aktarımı */
 
-  function writeConsole() {
+  /*function writeConsole() {
     const name = nameRef.current?.value
     const company_name = cnameRef.current?.value
-    const email = mailRef.current?.value
-    const password = pwRef.current?.value
+    const user_mail = mailRef.current?.value
+    const user_pass = pwRef.current?.value
     
-    console.log(`Ad: ${name}\n Şirket Adı: ${company_name}\n Mail: ${email}\n Password: ${password}`)
-  }
+    console.log(`Ad: ${name}\n Şirket Adı: ${company_name}\n Mail: ${user_mail}\n Parola: ${user_pass}`)
+  }*/
 
   return (
     <BoxContainer>
        <Input ref={nameRef}type="text" name="name" placeholder="Kullanıcı Adı" value={ formValues.name} onChange= {handleChange} />
        <p>{formErrors.name}</p>
        <Input ref={cnameRef} type="text" name="company_name" placeholder="Şirket Adı" value={ formValues.company_name} onChange= {handleChange} />
-       <Input ref={mailRef} type="text" name="email" placeholder="Email" value={ formValues.email} onChange= {handleChange} />
-       <p>{formErrors.email}</p>
-       <Input ref={pwRef} type="password" name="password" placeholder="Parola"value={ formValues.password} onChange= {handleChange}></Input>
-       <p>{formErrors.password}</p>
+       <Input ref={mailRef} type="text" name="user_mail" placeholder="user_mail" value={ formValues.user_mail} onChange= {handleChange} />
+       <p>{formErrors.user_mail}</p>
+       <Input ref={pwRef} type="password" name="user_pass" placeholder="Parola"value={ formValues.user_pass} onChange= {handleChange}></Input>
+       <p>{formErrors.user_pass}</p>
       <Marginer direction="vertical" margin={10} />
       <SubmitButton type="submit"  onClick={handleSubmit} >Kaydol</SubmitButton>
       <Marginer direction="vertical" margin="1em" />
