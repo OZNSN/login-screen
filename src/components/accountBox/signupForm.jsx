@@ -43,7 +43,9 @@ export function SignupForm(props) {
         if (response.data === "True") {
           toast.success("Kayıt Başarılı, gelen maili kontrol ediniz");
           //giriş ekranına geçmeden bekle mesaj timeout olana kadar
-          switchToSignin();
+          setTimeout(() => {
+            switchToSignin();
+          }, 1500);
         } else if (response.data === "alreadyhaveusername") {
           toast.error("Bu kullanıcı adı kullanılıyor");
         } else if (response.data === "alreadyhavemail") {

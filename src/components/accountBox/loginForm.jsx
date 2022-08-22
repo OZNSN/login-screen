@@ -9,11 +9,12 @@ import {
 import { Marginer } from "../marginer";
 import { AccountContext } from "./accountContext";
 import axios from "axios";
-import { ToastContainer, toast, Zoom, Bounce } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export function LoginForm(props) {
   const { switchToSignup } = useContext(AccountContext);
+  const { switchToSuccessLogin } = useContext(AccountContext);
 
   const initialValues = {
     user_mail: "",
@@ -27,11 +28,8 @@ export function LoginForm(props) {
   const pwRef = useRef(null);
   const mailRef = useRef(null);
 
-  /*function writeConsole() {
-    const user_pass = pwRef.current?.value
-    const user_mail = mailRef.current?.value
-    console.log(`Mail: ${user_mail}\n user_pass: ${user_pass}`)
-  }*/
+  //const [credentials, allCredentials] = useState("");
+  //const getCredentials = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -41,12 +39,16 @@ export function LoginForm(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     setFormErrors(validate(formValues));
+    //getCredentials();
     axios
       .post("http://18.191.138.182/v1/api/login", formValues)
       .then((response) => {
         if (response.data.msg === "Successfully logged in") {
           toast.success("Giriş Başarılı");
-          //window.open("profilePage","_self"); bekle öyle geçiş dene
+          //const allCredentials = response.data.credentials.allCredentials;
+          setTimeout(() => {
+            switchToSuccessLogin();
+          }, 1500);
         } else if (response.data.msg === "Password is wrong") {
           toast.error("Hatalı Şifre");
         } else if (response.data.msg === "There is no such user") {
@@ -58,8 +60,10 @@ export function LoginForm(props) {
         console.log(error);
       });
   };
+
   useEffect(() => {
     console.log(formErrors);
+
     if (Object.keys(formErrors).length === 0) {
       console.log(formValues);
     }

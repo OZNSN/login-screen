@@ -4,6 +4,7 @@ import { LoginForm } from "./loginForm";
 import { motion } from "framer-motion";
 import { AccountContext } from "./accountContext";
 import { SignupForm } from "./signupForm";
+import { ProfilePage } from "./profilePage";
 
 const BoxContainer = styled.div`
   width: 280px;
@@ -119,8 +120,14 @@ export function AccountBox(props) {
       setActive("signin");
     }, 400);
   };
+  const switchToSuccessLogin = () => {
+    playExpandingAnimation();
+    setTimeout(() => {
+      setActive("signinsuccess");
+    }, 400);
+  };
 
-  const contextValue = { switchToSignup, switchToSignin };
+  const contextValue = { switchToSignup, switchToSignin, switchToSuccessLogin };
 
   return (
     <AccountContext.Provider value={contextValue}>
@@ -145,10 +152,17 @@ export function AccountBox(props) {
               <SmallText>Devam etmek için kaydolun</SmallText>
             </HeaderContainer>
           )}
+          {active === "signinsuccess" && (
+            <HeaderContainer>
+              <HeaderText>Hoşgeldiniz</HeaderText>
+              <SmallText>Kullanıcı Bilgileri</SmallText>
+            </HeaderContainer>
+          )}
         </TopContainer>
         <InnerContainer>
           {active === "signin" && <LoginForm />}
           {active === "signup" && <SignupForm />}
+          {active === "signinsuccess" && <ProfilePage />}
         </InnerContainer>
       </BoxContainer>
     </AccountContext.Provider>
