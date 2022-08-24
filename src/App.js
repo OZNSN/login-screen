@@ -1,6 +1,7 @@
 import "./App.css";
 import styled from "styled-components";
 import { AccountBox } from "./components/accountBox";
+import { ProfileProvider } from "./components/accountBox/userContext";
 
 const AppContainer = styled.div`
   width: 100%;
@@ -11,12 +12,13 @@ const AppContainer = styled.div`
   justify-content: center;
 `;
 
-
 function App() {
   return (
-    <AppContainer>
-      <AccountBox />
-    </AppContainer>
+    <ProfileProvider>
+      <AppContainer>
+        <AccountBox />
+      </AppContainer>
+    </ProfileProvider>
   );
 }
 

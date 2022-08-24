@@ -8,13 +8,14 @@ import {
 } from "./common";
 import { Marginer } from "../marginer";
 import { AccountContext } from "./accountContext";
+import { useProfile } from "./userContext";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 export function LoginForm(props) {
   const { switchToSignup } = useContext(AccountContext);
   const { switchToSuccessLogin } = useContext(AccountContext);
+  const { profile, changeProfile } = useProfile();
 
   const initialValues = {
     user_mail: "",
@@ -28,9 +29,6 @@ export function LoginForm(props) {
   const pwRef = useRef(null);
   const mailRef = useRef(null);
 
-  //const [credentials, allCredentials] = useState("");
-  //const getCredentials = () => {
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
@@ -39,13 +37,13 @@ export function LoginForm(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     setFormErrors(validate(formValues));
-    //getCredentials();
+
     axios
       .post("http://18.191.138.182/v1/api/login", formValues)
       .then((response) => {
         if (response.data.msg === "Successfully logged in") {
           toast.success("Giriş Başarılı");
-          //const allCredentials = response.data.credentials.allCredentials;
+          changeProfile(response.data);
           setTimeout(() => {
             switchToSuccessLogin();
           }, 1500);
