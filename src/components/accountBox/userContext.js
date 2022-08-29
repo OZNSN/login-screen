@@ -5,9 +5,9 @@ export const useProfile = () => useContext(UserContext);
 export function ProfileProvider({ children }) {
   const [profile, setProfile] = useState({
     company_name: "",
-    msg: "",
     name: "",
-    success: true,
+    email: "",
+    password: "",
   });
 
   function changeProfile(newProfile) {

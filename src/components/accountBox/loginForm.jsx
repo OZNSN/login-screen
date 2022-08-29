@@ -43,6 +43,10 @@ export function LoginForm(props) {
       .then((response) => {
         if (response.data.msg === "Successfully logged in") {
           toast.success("Giriş Başarılı");
+
+          //farklı bir değişkene response.data ve mail ve pw değerlerini ata
+          response.data.email = formValues.user_mail;
+          response.data.password = formValues.user_pass;
           changeProfile(response.data);
           setTimeout(() => {
             switchToSuccessLogin();
@@ -76,7 +80,7 @@ export function LoginForm(props) {
     }
     if (!values.user_pass) {
       errors.user_pass = "Lütfen şifrenizi girin";
-    } else if (values.user_pass.length < 8) {
+    } else if (values.user_pass.length < 7) {
       errors.user_pass = "Şifre 8 haneden küçük olamaz";
     }
     return errors;

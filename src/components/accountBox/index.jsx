@@ -7,8 +7,8 @@ import { SignupForm } from "./signupForm";
 import { ProfilePage } from "./profilePage";
 
 const BoxContainer = styled.div`
-  width: 280px;
-  min-height: 550px;
+  min-width: 1500px;
+  min-height: 900px;
   display: flex;
   flex-direction: column;
   border-radius: 19px;
@@ -29,17 +29,17 @@ const TopContainer = styled.div`
 `;
 
 const BackDrop = styled(motion.div)`
-  width: 160%;
-  height: 550px;
+  width: 100%;
+  height: 100px;
   position: absolute;
   display: flex;
   flex-direction: column;
   border-radius: 50%;
-  transform: rotate(60deg);
-  top: -290px;
-  left: -70px;
+  transform: rotate(90deg);
+  top: -50px;
+  left: -2200px;
   background: rgb(155,89,182);
-  background: linear-gradient(58deg, rgba(155,89,182,1) 35%,
+  background: linear-gradient(29deg, rgba(155,89,182,1) 35%,
    rgba(0,212,255,1) 100%);
   );
 `;
@@ -77,16 +77,16 @@ const InnerContainer = styled.div`
 
 const backdropVariants = {
   expanded: {
-    width: "233%",
+    width: "500%",
     height: "1050px",
-    borderRadius: "20%",
-    transform: "rotate(60deg)",
+    borderRadius: "100%",
+    transform: "rotate(0deg)",
   },
   collapsed: {
-    width: "160%",
-    height: "550px",
-    borderRadius: "50%",
-    transform: "rotate(60deg)",
+    width: "500%",
+    height: "300px",
+    borderRadius: "100%",
+    transform: "rotate(0deg)",
   },
 };
 

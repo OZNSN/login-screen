@@ -11,7 +11,7 @@ const AppContainer = styled.div`
   align-items: center;
   justify-content: center;
 `;
-
+//sayfayı daha geniş yap mümkünse %100
 function App() {
   return (
     <ProfileProvider>

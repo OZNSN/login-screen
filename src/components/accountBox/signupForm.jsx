@@ -9,7 +9,7 @@ import {
 import { Marginer } from "../marginer";
 import { AccountContext } from "./accountContext";
 import axios from "axios";
-import { ToastContainer, toast, Zoom, Bounce } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export function SignupForm(props) {
@@ -65,7 +65,7 @@ export function SignupForm(props) {
     if (Object.keys(formErrors).length === 0) {
       console.log(formValues);
     }
-  }, [formErrors]);
+  }, [formErrors, formValues]);
   const validate = (values) => {
     const errors = {};
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
