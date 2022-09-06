@@ -5,10 +5,11 @@ import { motion } from "framer-motion";
 import { AccountContext } from "./accountContext";
 import { SignupForm } from "./signupForm";
 import { ProfilePage } from "./profilePage";
+import loginImg from "../assets/login.jpg";
 
 const BoxContainer = styled.div`
-  min-width: 1500px;
-  min-height: 900px;
+  min-width: 250px;
+  min-height: 500px;
   display: flex;
   flex-direction: column;
   border-radius: 19px;
@@ -20,12 +21,12 @@ const BoxContainer = styled.div`
 
 const TopContainer = styled.div`
   width: 100%;
-  height: 250px;
+  height: 275px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   padding: 0 1.8em;
-  padding-bottom: 5em;
+  padding-bottom: 8em;
 `;
 
 const BackDrop = styled(motion.div)`
@@ -37,10 +38,13 @@ const BackDrop = styled(motion.div)`
   border-radius: 50%;
   transform: rotate(90deg);
   top: -50px;
-  left: -2200px;
-  background: rgb(155,89,182);
-  background: linear-gradient(29deg, rgba(155,89,182,1) 35%,
-   rgba(0,212,255,1) 100%);
+  left: -1000px;
+  background: rgb(158, 164, 159);
+  background: linear-gradient(
+    90deg,
+    rgba(158, 164, 159, 1) 0%,
+    rgba(9, 121, 24, 1) 51%,
+    rgba(18, 79, 199, 1) 88%
   );
 `;
 
@@ -131,40 +135,49 @@ export function AccountBox(props) {
 
   return (
     <AccountContext.Provider value={contextValue}>
-      <BoxContainer>
-        <TopContainer>
-          <BackDrop
-            initial={false}
-            animate={isExpanded ? "expanded" : "collapsed"}
-            variants={backdropVariants}
-            transition={expandingTransition}
-          />
-          {active === "signin" && (
-            <HeaderContainer>
-              <HeaderText>Hoşgeldiniz</HeaderText>
-              <SmallText>Devam etmek için giriş yapın</SmallText>
-            </HeaderContainer>
-          )}
-          {active === "signup" && (
-            <HeaderContainer>
-              <HeaderText>Hesap</HeaderText>
-              <HeaderText>Yarat</HeaderText>
-              <SmallText>Devam etmek için kaydolun</SmallText>
-            </HeaderContainer>
-          )}
-          {active === "signinsuccess" && (
-            <HeaderContainer>
-              <HeaderText>Hoşgeldiniz</HeaderText>
-              <SmallText>Kullanıcı Bilgileri</SmallText>
-            </HeaderContainer>
-          )}
-        </TopContainer>
-        <InnerContainer>
-          {active === "signin" && <LoginForm />}
-          {active === "signup" && <SignupForm />}
-          {active === "signinsuccess" && <ProfilePage />}
-        </InnerContainer>
-      </BoxContainer>
+      <div class="bg-blue-50 relative border-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 h-screen w-full">
+          <div className="hidden sm:block">
+            <img className="w-full h-full object-cover" src={loginImg} alt="" />
+          </div>
+          <div class="container mx-auto  max-w-[40%] min-w-200 py-32   ">
+            <BoxContainer>
+              <TopContainer>
+                <BackDrop
+                  initial={false}
+                  animate={isExpanded ? "expanded" : "collapsed"}
+                  variants={backdropVariants}
+                  transition={expandingTransition}
+                />
+                {active === "signin" && (
+                  <HeaderContainer>
+                    <HeaderText>Hoşgeldiniz</HeaderText>
+                    <SmallText>Devam etmek için giriş yapın</SmallText>
+                  </HeaderContainer>
+                )}
+                {active === "signup" && (
+                  <HeaderContainer>
+                    <HeaderText>Hesap</HeaderText>
+                    <HeaderText>Yarat</HeaderText>
+                    <SmallText>Devam etmek için kaydolun</SmallText>
+                  </HeaderContainer>
+                )}
+                {active === "signinsuccess" && (
+                  <HeaderContainer>
+                    <HeaderText>Hoşgeldiniz</HeaderText>
+                    <SmallText>Kullanıcı Bilgileri</SmallText>
+                  </HeaderContainer>
+                )}
+              </TopContainer>
+              <InnerContainer>
+                {active === "signin" && <LoginForm />}
+                {active === "signup" && <SignupForm />}
+                {active === "signinsuccess" && <ProfilePage />}
+              </InnerContainer>
+            </BoxContainer>
+          </div>
+        </div>
+      </div>
     </AccountContext.Provider>
   );
 }
