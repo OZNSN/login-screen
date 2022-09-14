@@ -5,11 +5,12 @@ import { motion } from "framer-motion";
 import { AccountContext } from "./accountContext";
 import { SignupForm } from "./signupForm";
 import { ProfilePage } from "./profilePage";
-import loginImg from "../assets/login.jpg";
+
+const loginImg = "./assets/login.jpg";
 
 const BoxContainer = styled.div`
-  min-width: 250px;
-  min-height: 500px;
+  min-width: 200px;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   border-radius: 19px;
@@ -135,47 +136,49 @@ export function AccountBox(props) {
 
   return (
     <AccountContext.Provider value={contextValue}>
-      <div class="bg-blue-50 relative border-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 h-screen w-full">
-          <div className="hidden sm:block">
-            <img className="w-full h-full object-cover" src={loginImg} alt="" />
-          </div>
-          <div class="container mx-auto  max-w-[40%] min-w-200 py-32   ">
-            <BoxContainer>
-              <TopContainer>
-                <BackDrop
-                  initial={false}
-                  animate={isExpanded ? "expanded" : "collapsed"}
-                  variants={backdropVariants}
-                  transition={expandingTransition}
-                />
-                {active === "signin" && (
-                  <HeaderContainer>
-                    <HeaderText>Hoşgeldiniz</HeaderText>
-                    <SmallText>Devam etmek için giriş yapın</SmallText>
-                  </HeaderContainer>
-                )}
-                {active === "signup" && (
-                  <HeaderContainer>
-                    <HeaderText>Hesap</HeaderText>
-                    <HeaderText>Yarat</HeaderText>
-                    <SmallText>Devam etmek için kaydolun</SmallText>
-                  </HeaderContainer>
-                )}
-                {active === "signinsuccess" && (
-                  <HeaderContainer>
-                    <HeaderText>Hoşgeldiniz</HeaderText>
-                    <SmallText>Kullanıcı Bilgileri</SmallText>
-                  </HeaderContainer>
-                )}
-              </TopContainer>
-              <InnerContainer>
-                {active === "signin" && <LoginForm />}
-                {active === "signup" && <SignupForm />}
-                {active === "signinsuccess" && <ProfilePage />}
-              </InnerContainer>
-            </BoxContainer>
-          </div>
+      <div className="grid grid-flow-col gap-3  h-screen w-full">
+        <div className="hidden sm:block">
+          <img
+            className="col-span-4 w-full h-screen object-fill"
+            src={loginImg}
+            alt=""
+          />
+        </div>
+        <div className="bg-white col-span-1">
+          <BoxContainer>
+            <TopContainer>
+              <BackDrop
+                initial={false}
+                animate={isExpanded ? "expanded" : "collapsed"}
+                variants={backdropVariants}
+                transition={expandingTransition}
+              />
+              {active === "signin" && (
+                <HeaderContainer>
+                  <HeaderText>Hoşgeldiniz</HeaderText>
+                  <SmallText>Devam etmek için giriş yapın</SmallText>
+                </HeaderContainer>
+              )}
+              {active === "signup" && (
+                <HeaderContainer>
+                  <HeaderText>Hesap</HeaderText>
+                  <HeaderText>Yarat</HeaderText>
+                  <SmallText>Devam etmek için kaydolun</SmallText>
+                </HeaderContainer>
+              )}
+              {active === "signinsuccess" && (
+                <HeaderContainer>
+                  <HeaderText>Hoşgeldiniz</HeaderText>
+                  <SmallText>Kullanıcı Bilgileri</SmallText>
+                </HeaderContainer>
+              )}
+            </TopContainer>
+            <InnerContainer>
+              {active === "signin" && <LoginForm />}
+              {active === "signup" && <SignupForm />}
+              {active === "signinsuccess" && <ProfilePage />}
+            </InnerContainer>
+          </BoxContainer>
         </div>
       </div>
     </AccountContext.Provider>

@@ -12,7 +12,6 @@ import { useProfile } from "./userContext";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import loginImg from "../assets/login.jpg";
 export function LoginForm(props) {
   const { switchToSignup } = useContext(AccountContext);
   const { switchToSuccessLogin } = useContext(AccountContext);
